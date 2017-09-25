@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ろーりんぐさんかく</title>
+        <meta charset="utf-8">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.js"
+            integrity="sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg="
+            crossorigin="anonymous"></script>
+        <style>
+            #triangle {
+                position: absolute;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 0 100px 173.2px 100px;
+                border-color: transparent transparent #ffcc00 transparent;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <h1>ローリング△さんかく</h1>
+        <div id="triangle"></div>
+
+        <script>
+            //三角形の回転
+            let triangle = $("#triangle")
+            let r = 0;
+            triangle.css("bottom", "50%")
+            //三角形の場所
+            let vecRight = true;
+            let xp = 0;
+
+            $(document).ready(function(){
+                setInterval(function(){
+                    if(r++ > 360){
+                        r = 0
+                    }else{
+                        triangle.css("transform", "rotate(" + r + "deg)")
+                    }
+                    moveTriangle()
+                },10)
+            })
+
+            function moveTriangle() {
+                if(vecRight) xp++
+                else xp--
+                if(xp > $(window).width()) vecRight = false
+                else if (xp < 0)vecRight = true
+                triangle.css("left", xp + "px")
+            }
+
+        </script>
+    </body>
+
+</html>
